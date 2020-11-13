@@ -9,10 +9,12 @@ La App utiliza los componentes default de React Native los cuales buscan simular
 
 
 **IOS**
+
 ![ios](src/assets/ios.gif) 
 
 
 **ANDROID**
+
 ![android](src/assets/android.gif)
 
 > Las diferencias entre componentes no son muchas pero es importante saber que pueden aparecer y pueden llegar a ser fuentes de algunos dolores de cabeza cuando el componente no se ve como esperamos, por ejemplo al momento de [aplicar sombras](https://medium.com/game-development-stuff/how-to-apply-shadows-on-react-native-fa745d374ae7) donde las APIs que utilizan son completamente diferentes.
