@@ -5,9 +5,6 @@
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "checkJs": true,
-        "jsx": "react-native"
-    },
-    "exclude": [
-        "node_modules"
-    ]
+        "jsx": "react-native",
+    }
 }

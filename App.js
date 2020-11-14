@@ -1,56 +1,42 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
+import Home from './src/components/home';
+import { screenNames } from './src/screenNames';
+import CounterButtonScreen from './src/components/counter/counterButtonScreen';
+import CounterDisplayScreen from './src/components/counter/counterDisplayScreen';
+import DateTimeScreen from './src/components/datetime/dateTimeScreen';
 
+// Un stack navigator es un navegador que reemplaza una pantalla
+// por otra completamente
 const Stack = createStackNavigator();
-const screens = {
-  HOME: 'HOME',
-  PROFILE: 'PROFILE',
-};
 
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'space-around', alignItems: 'center' },
-});
-
-const Home = () => {
-  const navigation = useNavigation();
-  return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-      <Button
-        title="Anda a la home"
-        onPress={() => {
-          navigation.navigate(screens.PROFILE);
-        }}
-      />
-    </View>
-  );
-};
-
-const Profile = () => {
-  const navigation = useNavigation();
-  return (
-    <View style={styles.container}>
-      <Text>Profile</Text>
-      <Button
-        title="Anda al perfil"
-        onPress={() => {
-          navigation.navigate(screens.HOME);
-        }}
-      />
-    </View>
-  );
-};
+// El 'componente' <></> es un componente que no renderiza nada
+// se usa cuando necesitamos pasar muchos elementos a algo que
+// solo esperaba 1 (en este caso el comentario y Provider)
 
 const App = () => (
-  <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name={screens.HOME} component={Home} />
-      <Stack.Screen name={screens.PROFILE} component={Profile} />
-    </Stack.Navigator>
-  </NavigationContainer>
+  <>
+    {/* Provider es quien se encarga que por
+    detras todos tengan acceso a 'store' */}
+    <Provider store={store}>
+      {/* De manera simitar NavigationContainer se encarga que
+      todas las pantallas puedan acceder a la navegacion */}
+      <NavigationContainer>
+        {/* Dentro de nuestro stack navigator definimos las
+        pantallas de nuestra app con su nombre*/}
+        <Stack.Navigator>
+          <Stack.Screen name={screenNames.HOME} component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name={screenNames.COUNTER_BUTTON} component={CounterButtonScreen} />
+          <Stack.Screen name={screenNames.COUNTER_DISPLAY} component={CounterDisplayScreen} />
+          <Stack.Screen name={screenNames.GET_TIME} component={DateTimeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  </>
 );
 
 export default App;
