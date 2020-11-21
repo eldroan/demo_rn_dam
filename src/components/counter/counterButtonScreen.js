@@ -1,41 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { screenNames } from '../../screenNames';
-import { useDispatch } from 'react-redux';
-import { decremented, incremented } from '../../redux/counterSlice';
 
 const CounterButtonScreen = () => {
+  const [counter, setCounter] = useState(0);
   const navigation = useNavigation();
-  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        En esta pantalla hay un contador y podes afectar incrementandolo o decrementandolo desde esta pantalla. El valor
-        de este contador lo mostramos recién en la siguiente pantalla. Lo interesante es que no le estamos pasando el
-        dato de forma directa sino que lo hacemos mediante Redux.
+        En esta pantalla hay un contador y podes modificar su estado incrementandolo o decrementandolo.
       </Text>
-      <View style={styles.horizontalContainer}>
-        <Button
-          title="Sumar"
-          onPress={() => {
-            dispatch(incremented());
-          }}
-        />
+
+      <View>
+        <Text style={styles.text}>{`Valor --> ${counter}`}</Text>
+        <View style={styles.separator} />
+        <View style={styles.horizontalContainer}>
+          <Button
+            title="Sumar"
+            onPress={() => {
+              setCounter(counter + 1);
+            }}
+          />
+          <View style={styles.separator} />
+          <Button
+            title="Restar"
+            onPress={() => {
+              setCounter(counter - 1);
+            }}
+          />
+        </View>
+      </View>
+
+      <View>
+        <Text style={styles.text}>
+          Además, una funcionalidad util es pasar estos valores entre pantallas. De forma similar a lo que haciamos en
+          Android en react native podemos hacerlo
+        </Text>
         <View style={styles.separator} />
         <Button
-          title="Restar"
+          title="Quiero ver este valor pero en otra pantalla!"
           onPress={() => {
-            dispatch(decremented());
+            navigation.navigate(screenNames.COUNTER_DISPLAY, { counter: counter }); //Le pasamos el valor del contador por parametro
           }}
         />
       </View>
-      <Button
-        title="Quiero ver cuanto sume!"
-        onPress={() => {
-          navigation.navigate(screenNames.COUNTER_DISPLAY);
-        }}
-      />
 
       <Button
         title="Me aburri, quiero volver..."

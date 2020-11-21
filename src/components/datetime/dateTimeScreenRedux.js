@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ActivityIndicator, Button, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentTime, loadingCurrentTime } from '../../redux/selectors';
+import { getTime } from '../../redux/timeSlice';
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'space-around', alignItems: 'center' },
@@ -9,30 +11,12 @@ const styles = StyleSheet.create({
   text: { textAlign: 'center' },
 });
 
-const DateTimeScreen = () => {
+const DateTimeReduxScreen = () => {
   const navigation = useNavigation();
-  const [time, setTime] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const time = useSelector(currentTime);
+  const loading = useSelector(loadingCurrentTime);
   const showText = !loading && time;
-
-  const fetchTime = async () => {
-    if (!loading) {
-      setLoading(true);
-      try {
-        const response = await Axios.get('https://worldtimeapi.org/api/ip');
-        setTime(response.data.datetime);
-      } catch {
-        //Fallo la request
-        setTime('No se pudo recuperar la hora');
-      }
-      setLoading(false);
-
-      /* Tip: No usar 'finally' en un try/catch si estamos usando 'await' ya que
-      ese bloque de código se ejecutara cuando se bloquee esperando respuesta y
-      no suele ser lo que buscamos, lo que nos puede traer dolores de cabeza. */
-    }
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
@@ -42,7 +26,14 @@ const DateTimeScreen = () => {
       {loading && <ActivityIndicator />}
       {showText && <Text>{time}</Text>}
       <View>
-        <Button title="Que hora es?" onPress={fetchTime} />
+        <Button
+          title="Que hora es?"
+          onPress={() => {
+            if (!loading) {
+              dispatch(getTime());
+            }
+          }}
+        />
         <View style={styles.separator} />
         <Button
           title="Volver"
@@ -55,4 +46,4 @@ const DateTimeScreen = () => {
   );
 };
 
-export default DateTimeScreen;
+export default DateTimeReduxScreen;
