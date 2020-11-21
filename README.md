@@ -3,6 +3,10 @@
 Esta demo app utiliza
 * [React Native v0.63.3](https://reactnative.dev/blog/2020/07/06/version-0.63)
 * [React Navigation 5](https://reactnavigation.org/docs/getting-started)
+* [Axios](https://github.com/axios/axios#axios)
+* [Redux](https://es.redux.js.org/)
+* [Redux Toolkit](https://redux-toolkit.js.org/)
+* [Redux Thunk](https://github.com/reduxjs/redux-thunk)
 
 ## Comparación entre Android y IOS
 La App utiliza los componentes default de React Native los cuales buscan simular el look and feel nativo de cada plataforma. Es por esto que el build se vera diferente entre ambas plataformas.
