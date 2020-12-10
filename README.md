@@ -4,6 +4,7 @@ Esta demo app utiliza
 * [React Native v0.63.3](https://reactnative.dev/blog/2020/07/06/version-0.63)
 * [React Navigation 5](https://reactnavigation.org/docs/getting-started)
 * [Axios](https://github.com/axios/axios#axios)
+* React Context ([Concepto (Sin Hooks)](https://es.reactjs.org/docs/context.html) - [Hook useContext](https://es.reactjs.org/docs/hooks-reference.html#usecontext))
 * [Redux](https://es.redux.js.org/)
 * [Redux Toolkit](https://redux-toolkit.js.org/)
 * [Redux Thunk](https://github.com/reduxjs/redux-thunk)
