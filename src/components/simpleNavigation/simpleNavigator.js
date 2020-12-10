@@ -2,15 +2,11 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import FirstScreen from './firstScreen';
 import SecondScreen from './secondScreen';
+import { SimpleNavigatorScreens } from './simpleNavigatorScreens';
 
 // Un stack navigator es un navegador que reemplaza una pantalla
 // por otra completamente
 const Stack = createStackNavigator();
-
-export const SimpleNavigatorScreens = {
-  FIRST: 'Primera',
-  SECOND: 'Segunda',
-};
 
 const SimpleNavigator = () => {
   return (

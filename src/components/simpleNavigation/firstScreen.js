@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import { SimpleNavigatorScreens } from './simpleNavigator';
+import { SimpleNavigatorScreens } from './simpleNavigatorScreens';
 
 const FirstScreen = () => {
   const navigation = useNavigation();
